@@ -1,4 +1,5 @@
 import os
+import heapq
 
 class HuffmanCoding:
     def __init__(self,path):
@@ -6,6 +7,25 @@ class HuffmanCoding:
         self.heap = []
         self.codes = {}
 
+    class HeapNode:
+        def __init__(self,char,freq):
+            self.char = char
+            self.freq = freq
+            self.left = None
+            self.right = None
+
+        # comparator functions
+        def __lt__(self,other):
+            return self.freq < other.freq
+
+        def __eq__(self,other):
+            if(other == None):
+                return False
+            if(not isinstance(other,HuffmanCoding.HeapNode)):
+                return False
+            return self.freq == other.freq
+        
+    
     def make_frequency_dict(text):
         '''Calculate frequency and return dict '''
         frequency = {}
@@ -17,7 +37,12 @@ class HuffmanCoding:
 
     def make_heap(self,frequency):
         # make priority queue
-        pass
+        for key in frequency:
+            node = HeapNode(key,frequency[key])
+            heapq.heappush(self.heap,node)
+            
+
+        
 
     def merge_codes(self):
         #build huffman tree. Save root node in heap
