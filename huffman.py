@@ -7,8 +7,13 @@ class HuffmanCoding:
         self.codes = {}
 
     def make_frequency_dict(text):
-        #Cal freq and return dict
-        pass
+        '''Calculate frequency and return dict '''
+        frequency = {}
+        for character in text:
+            if not character in frequency:
+                frequency[character] = 0
+            frequency[character] += 1
+        return frequency
 
     def make_heap(self,frequency):
         # make priority queue
